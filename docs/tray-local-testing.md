@@ -1,5 +1,8 @@
 # Testing tray changes locally
 
+Commands written `./bin/cdx` run from a [cdx-manager](https://github.com/AlexAgo83/cdx-manager)
+checkout, so the tray reads the CDX you are changing; cargo commands run from this repository.
+
 How to see a tray change working on a development machine, from the cheapest
 loop to the one that puts a real icon in the menu bar. Every command here was
 run on macOS (Apple Silicon); the notes say where another platform differs.
@@ -42,7 +45,7 @@ The companion draws its whole menu to the terminal with `--print`, which is the
 loop to live in. First build is around 25 seconds, every one after is instant.
 
 ```bash
-CDX_TRAY_CDX="$PWD/bin/cdx" cargo run -q --manifest-path tray/Cargo.toml -- --print
+CDX_TRAY_CDX="$(command -v cdx)" cargo run -q -- --print
 ```
 
 `CDX_TRAY_CDX` is what points the companion at the working tree instead of the
@@ -59,7 +62,7 @@ that is actually delivering them.
 ## 3. The test suites
 
 ```bash
-cargo test -q --manifest-path tray/Cargo.toml       # 89 tests, well under a second
+cargo test -q# 89 tests, well under a second
 python3 -m pytest test/ -q
 ```
 
@@ -73,7 +76,7 @@ Only for what the first three cannot show: the drawn cell, the notification
 banner, the click paths, the icon itself.
 
 ```bash
-./scripts/build-tray.sh --dev        # writes tray/target/release/CDX.app
+./scripts/build-tray.sh --dev        # writes target/release/CDX.app
 ```
 
 The companion is single-instance — a pid lock in `TMPDIR` — so the development
@@ -81,7 +84,7 @@ build will not start while the installed one holds it. Quit the installed
 companion from its own menu first, then:
 
 ```bash
-CDX_TRAY_CDX="$PWD/bin/cdx" open -n tray/target/release/CDX.app
+CDX_TRAY_CDX="$(command -v cdx)" open -n target/release/CDX.app
 ```
 
 To go back to the installed companion afterwards:

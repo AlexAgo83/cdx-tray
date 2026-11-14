@@ -1,0 +1,30 @@
+name: CDX contract
+
+# The tray only rebuilds when it changes or when CDX breaks the snapshot contract. This daily check
+# compares the snapshot major CDX publishes on its main branch with the one this tray reads, and
+# fails (GitHub notifies the maintainer) when CDX moved on.
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  major:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compare snapshot majors
+        run: |
+          set -euo pipefail
+          cdx=$(curl -fsSL https://raw.githubusercontent.com/AlexAgo83/cdx-manager/main/src/tray_contract.py \
+            | sed -n 's/^SCHEMA_MAJOR = \([0-9]*\)$/\1/p')
+          tray=$(sed -n 's/^pub const SCHEMA_MAJOR: u64 = \([0-9]*\);/\1/p' src/snapshot.rs)
+          echo "CDX publishes snapshot major ${cdx:-?}; this tray reads $tray."
+          [ -n "$cdx" ] || { echo "::error::SCHEMA_MAJOR not found in cdx-manager src/tray_contract.py"; exit 1; }
+          if [ "$cdx" != "$tray" ]; then
+            echo "::error::CDX now publishes snapshot major $cdx. Update src/snapshot.rs, then release cdx-tray."
+            exit 1
+          fi

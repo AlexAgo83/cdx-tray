@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
-  # cdx-manager announces a new tray snapshot schema major: re-check this build against it.
-  repository_dispatch:
-    types: [cdx-schema-major]
 
 permissions:
   contents: read
@@ -22,11 +19,3 @@ jobs:
         run: cargo test --locked
       - name: Test the release ledger recorder
         run: python3 -m unittest discover -s tests -p 'test_*.py'
-      - name: Announced schema major
-        if: github.event_name == 'repository_dispatch'
-        run: |
-          echo "cdx announced snapshot schema major ${{ github.event.client_payload.schema_major }}."
-          supported=$(sed -n 's/^pub const SCHEMA_MAJOR: u64 = \([0-9]*\);/\1/p' src/snapshot.rs)
-          if [ "$supported" != "${{ github.event.client_payload.schema_major }}" ]; then
-            echo "::warning::This tray reads schema major $supported; cdx now publishes ${{ github.event.client_payload.schema_major }}. Update src/snapshot.rs and release."
-          fi

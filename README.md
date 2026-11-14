@@ -33,12 +33,12 @@ and local testing are covered in [local testing](docs/tray-local-testing.md).
 | See at a glance whether any session can take work | The tray icon (ok, low, critical, unknown) | [Local testing](docs/tray-local-testing.md) |
 | See every session's capacity and reset time | Open the menu | [Local testing](docs/tray-local-testing.md) |
 | Open a session's terminal | Click its menu row | [Local testing](docs/tray-local-testing.md) |
-| Know when CDX outgrew this tray | An update hint for a newer snapshot schema | [Compatibility](#documentation) |
+| Know when CDX outgrew this tray | An update hint for a newer snapshot schema | [Compatibility](CONTRIBUTING.md#compatibility-with-cdx) |
 
 ## Documentation
 
 - [Local testing](docs/tray-local-testing.md): build, run and check the companion on each platform.
 - [Runtime and transport boundary](docs/adr-005-runtime-and-transport-boundary.md): why a native icon and menu, how it talks to CDX, how macOS builds are signed.
-- Compatibility: each release records in `checksums/release-archives.json` the CDX snapshot schema major it reads; `cdx tray install` only pairs a CDX with a tray that reads its major. A new major in CDX announces itself here and triggers this repository's CI.
+- Compatibility: each release records in `checksums/release-archives.json` the CDX snapshot schema major it reads; `cdx tray install` only pairs a CDX with a tray that reads its major. A daily check fails this repository's CI as soon as CDX publishes a major this tray does not read.
 
 Contributions are welcome through pull requests. cdx-tray is [MIT licensed](LICENSE).
