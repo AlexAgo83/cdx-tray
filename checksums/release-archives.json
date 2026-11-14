@@ -1,4 +1,15 @@
 {
   "schema_version": 1,
-  "releases": {}
+  "releases": {
+    "v0.17.1": {
+      "schema_major": 1,
+      "tray_assets": {
+        "aarch64-apple-darwin": "4db7fb257627ff9a17908acc2347dd72eb9c6957a21dc3e6a3e14f2cd19c389c",
+        "aarch64-unknown-linux-musl": "10a161389b5c68a33a5d7f91019ade9723faf31a0ee004ed9201436fe9c24114",
+        "x86_64-apple-darwin": "433ad54fcadfea77b0bcd2f926925688b6ec81d969aa96d1df25790c1bf7f83e",
+        "x86_64-pc-windows-msvc": "50cd8bf0925933116485e699dabb25df521ab0f962424d689d83f7f88c9d3909",
+        "x86_64-unknown-linux-musl": "eacc295d072919b01aa8087d2a7b59025f1c5fc379f87a96374762273a33482c"
+      }
+    }
+  }
 }
