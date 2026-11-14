@@ -83,8 +83,8 @@ package_asset() {
 
 command -v cargo >/dev/null 2>&1 || die "cargo not found. Install Rust: https://rustup.rs"
 
-VERSION="$(tr -d '[:space:]' < "$REPO_ROOT/VERSION")"
-[ -n "$VERSION" ] || die "VERSION is empty"
+VERSION="$(sed -n 's/^version = "\(.*\)"$/\1/p' "$REPO_ROOT/Cargo.toml" | head -1)"
+[ -n "$VERSION" ] || die "version not found in Cargo.toml"
 
 if [ "$LINUX_BUILD" = "1" ]; then
   TARGET=x86_64-unknown-linux-musl
