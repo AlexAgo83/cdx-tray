@@ -1,10 +1,10 @@
-<img src="assets/icons/CDXLight-ok@2x.png" alt="CDX tray icon" width="48" align="left" />
+<img src="docs/assets/icon.png" alt="CDX tray icon" width="64" align="left" />
 
-# cdx-tray
+# CDX Tray
 
 <br clear="left"/>
 
-[![CI](https://github.com/AlexAgo83/cdx-tray/actions/workflows/ci.yml/badge.svg)](https://github.com/AlexAgo83/cdx-tray/actions/workflows/ci.yml) [![License](https://img.shields.io/badge/license-MIT-4C8BF5)](LICENSE) ![Rust](https://img.shields.io/badge/Rust-2021-DEA584?logo=rust&logoColor=white)
+[![License](https://img.shields.io/badge/license-MIT-4C8BF5)](LICENSE) ![Version](https://img.shields.io/badge/version-v0.17.1-4C8BF5) ![Rust](https://img.shields.io/badge/Rust-2021-DEA584?logo=rust&logoColor=white) [![CI](https://github.com/AlexAgo83/cdx-tray/actions/workflows/ci.yml/badge.svg)](https://github.com/AlexAgo83/cdx-tray/actions/workflows/ci.yml)
 
 **Your AI coding quota, one glance away.** cdx-tray is the optional system tray companion of
 [CDX Manager](https://github.com/AlexAgo83/cdx-manager): one icon that says whether your Codex and
